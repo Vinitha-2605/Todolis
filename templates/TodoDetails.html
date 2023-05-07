@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>TodoListDetails</h1>
+    <ul>
+        {% for tododetail in forms %}
+        <li><a href="todo/{{tododetail.id}}">TodoListId:{{tododetail.id}}</a></li>
+        <p>Title:{{ tododetail.title }}
+        <p>Description {{ tododetail.description }}
+         <form action ='{% url 'delete' tododetail.id %}' method ="POST">
+          {% csrf_token %}
+          <button type="submit">Delete</button>
+         </form>
+        {% endfor %}
+    </ul>
+<br>
+
+<h1>TodoItemDetails</h1>
+<ul>
+    {% for tododetail in todoitemforms %}
+    <li><a href="todoitems/{{tododetail.id}}">TodoItemId:{{tododetail.id}}</a></li>
+    <p>Title:{{ tododetail.title }}
+    <p>Description: {{ tododetail.description }}
+    <p>DueDate: {{ tododetail.duedate }}
+     <form action ='{% url 'tododelete' tododetail.id %}'>
+         <button type="submit">Delete</button>
+     </form>
+    {% endfor %}
+</ul>
+
+<a href="/todo">Add a Todolist</a>
+</body>
+</html>
+{% endblock %}
